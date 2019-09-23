@@ -7,6 +7,7 @@ const result_div = document.querySelector('.result > p');
 const rock_div = document.getElementById('r');
 const paper_div = document.getElementById('p');
 const scissors_div = document.getElementById('s');
+const history_div = document.getElementsByClassName('history');
 
 function getComputerChoice(){
   const choice = ['r', 'p', 's'];
@@ -20,11 +21,16 @@ function convertLetter(letter){
   if(letter === "s") return "Scissors";
 }
 
+function tracker(result_div){
+  history_div.innerHTML += result_div.innerHTML;
+}
+
 function win(userChoice, computerChoice){
     userScore++;
     userScore_Span.innerHTML = userScore;
     aiScore_Span.innerHTML = compScore;
     result_div.innerHTML = "Congratulations " + convertLetter(userChoice) + " beats " + convertLetter(computerChoice) + " You win!";
+    tracker(result_div);
 }
 
 function lose(userChoice, computerChoice){
@@ -32,11 +38,13 @@ function lose(userChoice, computerChoice){
   userScore_Span.innerHTML = userScore;
   aiScore_Span.innerHTML = compScore;
   result_div.innerHTML = "Congratulations! " + convertLetter(userChoice) + " loses to " + convertLetter(computerChoice) + " You lose!";
+  tracker(result_div);
 }
 
 function draw(userChoice, computerChoice){
   console.log("Draw!");
   result_div.innerHTML = "Uhm! " + convertLetter(userChoice) + " equals " + convertLetter(computerChoice);
+  tracker(result_div);
 }
 
 
